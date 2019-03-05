@@ -31,7 +31,7 @@ import (
 func DigestHash(sql string) (result string) {
 	d := digesterPool.Get().(*sqlDigester)
 	result = d.doDigest(sql)
-	digesterPool.Put(d)
+	//	digesterPool.Put(d)
 	return
 }
 
