@@ -135,7 +135,10 @@ func (parser *Parser) Parse(sql, charset, collation string) (stmt []ast.StmtNode
 	for _, stmt := range parser.result {
 		ast.SetFlag(stmt)
 	}
-	return parser.result, warns, nil
+	result := parser.result
+	// Reset parser.result to make sure the elements can be GCed in time.
+	parser.result = parser.result[:0]
+	return result, warns, nil
 }
 
 func (parser *Parser) lastErrorAsWarn() {
