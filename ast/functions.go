@@ -23,6 +23,7 @@ import (
 	"github.com/pingcap/parser/format"
 	"github.com/pingcap/parser/model"
 	"github.com/pingcap/parser/types"
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -347,6 +348,7 @@ type FuncCallExpr struct {
 
 // Restore implements Node interface.
 func (n *FuncCallExpr) Restore(ctx *format.RestoreCtx) error {
+	logrus.Warning(n.funcNode.GetType())
 	var specialLiteral string
 	switch n.FnName.L {
 	case DateLiteral:
